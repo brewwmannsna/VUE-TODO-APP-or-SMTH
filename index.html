@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<!-- Local CSS Link -->
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
+	<!-- Google Fonts - Montserrat - Poppins - Rubik - Open Sans - Staatliches -->
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Open+Sans&family=Poppins&family=Rubik&family=Staatliches&display=swap" rel="stylesheet">
+	<script type="text/javascript">
+		bigtodos = '';
+		if (localStorage.todos === "string"){
+			async ()=>{
+				shit = await JSON.stringify(localStorage.todos);
+				shit = await shit.map(a=>JSON.parse(a));
+				bigtodos = shit;
+			}
+		}
+		else{
+			bigtodos = [{text:"amogus",done:false}];
+		}
+	</script>
+	<script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+	<h1>TODO LIST</h1>
+	<div id="a">
+		<div class="input-form">
+			<input v-model="message" placeholder="Enter Tasks..." />
+			<button v-on:click="Add" v-on>Add</button>
+		</div>
+		<p v-if="error" class="sadge">
+			Type something.... Idiot.
+		</p>
+		<p>
+			Click to mark done and Double Click to delete.
+		</p>
+		<h2>Todos</h2>
+		<ul v-on:dblclick="Delete">
+			<li
+			v-for="todo in todos"
+			v-if="todo.done"
+			v-bind:value="todo.done"
+			v-on:click="Strike(todo)"
+			>
+			<strike>{{todo.text}}</strike>
+			</li>
+			<li v-else v-bind:value="todo.done" v-on:click="Strike(todo)">
+				{{todo.text}}
+			</li>
+		</ul>
+	</div>
+	<!-- Local JS Link -->
+	<script type="text/javascript" src="js/index.js"></script>
+</body>
+</html>
